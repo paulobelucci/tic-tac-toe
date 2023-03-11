@@ -32,10 +32,6 @@ async function initGame(){
     let lastPlayer = whoStarted
 
     while (areThereOptionsToMake() > 0) {
-        if(winner != "") {
-            setWinner()
-            return 
-        }
         const nextFieldMove = randomIntFromInterval(2,9)
         if(isEmptyPosition(nextFieldMove)){
             if(lastPlayer === "X"){
@@ -47,6 +43,10 @@ async function initGame(){
             }
         }
         if (areThereOptionsToMake() < 5) await checkWinner()
+        if(winner != "") {
+            setWinner()
+            return 
+        }
         await new Promise(r => setTimeout(r, 100));
     }
 }
@@ -67,6 +67,8 @@ function makeMove(positionNumber, value){
 
     const positionElement = document.getElementById(`position_${positionNumber}`)
     positionElement.innerText = value
+    if(value === "X") positionElement.classList.add("cross")
+    else  positionElement.classList.add("circle")
 
     return true
 }
@@ -139,7 +141,7 @@ async function checkWinner(){
 function setWinner(){
     winnerSolution.forEach(index => {
         const element =  document.getElementById(`position_${index}`)
-        element.className = "winner"
+        element.classList.add("winner")
     })
     const infoDiv = document.getElementById("info")
     const infoContent = document.createElement('div')

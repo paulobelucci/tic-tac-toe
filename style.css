@@ -24,7 +24,7 @@ body {
     flex-basis: 30%;
     width: 100px;
     height: 100px;
-    border: 2px solid red;
+    border: 2px solid gray;
     font-size: 48px;
     font-weight: bold;
 }
@@ -71,4 +71,12 @@ body {
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+}
+
+.cross {
+    color: red;
+}
+
+.circle {
+    color: blue;
 }
