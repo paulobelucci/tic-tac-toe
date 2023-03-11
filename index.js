@@ -3,10 +3,13 @@ let winner= ""
 let winnerSolution = []
 
 createBoard()
+handleButtonDisabledStatus (false)
 
 async function Game(){
+    handleButtonDisabledStatus(true)
     await initGame()
-    if(winner === "") setDraw()
+    if(winner === "") await setDraw()
+    handleButtonDisabledStatus(false)
 }
 
 async function resetGame(){
@@ -150,7 +153,7 @@ function setWinner(){
     infoDiv.appendChild(infoContent)
 }
 
-function setDraw(){
+async function setDraw(){
     const infoDiv = document.getElementById("info")
     const infoContent = document.createElement('div')
     infoContent.innerHTML = `It is a DRAW.`
@@ -158,6 +161,18 @@ function setDraw(){
     infoDiv.appendChild(infoContent)
 }
 
+function handleButtonDisabledStatus (disable){
+    const playButton = document.getElementById("play")
+    if(disable) {
+        playButton.disabled = disable
+        playButton.className = "disabled-button"
+    } else {
+        playButton.disabled = disable
+        playButton.className = "enabled-button"
+    }
+}
+
 function startGame(){
     Game()
 }
+
